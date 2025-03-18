@@ -9,7 +9,7 @@ from yt_dlp import DownloadError
 from yt_dlp.utils import DateRange
 from biliup.config import config
 from ..engine.decorators import Plugin
-from . import logger
+from 。 import logger
 from ..engine.download import DownloadBase
 
 VALID_URL_BASE = r'https?://(?:(?:www|m)\.)?youtube\.com/(?P<id>.*?)\??(.*?)'
@@ -138,17 +138,17 @@ class Youtube(DownloadBase):
                 'format': 'bestvideo',
                 # 'proxy': proxyUrl,
             }
-
-            if self.youtube_prefer_vcodec is not None:
-                ydl_opts['format'] += f"[vcodec~='^({self.youtube_prefer_vcodec})']"
-            if self.youtube_max_videosize is not None and self.is_download:
-                # 直播时无需限制文件大小
-                ydl_opts['format'] += f"[filesize<{self.youtube_max_videosize}]"
-            if self.youtube_max_resolution is not None:
-                ydl_opts['format'] += f"[height<={self.youtube_max_resolution}]"
-            ydl_opts['format'] += "+bestaudio"
-            if self.youtube_prefer_acodec is not None:
-                ydl_opts['format'] += f"[acodec~='^({self.youtube_prefer_acodec})']"
+            # 直接用bestvideo和bestaudio 
+            # if self.youtube_prefer_vcodec is not None:
+            #     ydl_opts['format'] += f"[vcodec~='^({self.youtube_prefer_vcodec})']"
+            # if self.youtube_max_videosize is not None and self.is_download:
+            #     # 直播时无需限制文件大小
+            #     ydl_opts['format'] += f"[filesize<{self.youtube_max_videosize}]"
+            # if self.youtube_max_resolution is not None:
+            #     ydl_opts['format'] += f"[height<={self.youtube_max_resolution}]"
+            ydl_opts['format'] += "bestvideo+bestaudio/best"
+            # if self.youtube_prefer_acodec is not None:
+            #     ydl_opts['format'] += f"[acodec~='^({self.youtube_prefer_acodec})']"
             # 不能由yt_dlp创建会占用文件夹
             if not os.path.exists(download_dir):
                 os.makedirs(download_dir)
