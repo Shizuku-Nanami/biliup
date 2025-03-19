@@ -135,7 +135,7 @@ class Youtube(DownloadBase):
                 'cookiefile': self.youtube_cookie,
                 'break_on_reject': True,
                 'download_archive': 'archive.txt',
-                'format': 'bestvideo',
+                'format': 'bestvideo+bestaudio',
                 # 'proxy': proxyUrl,
             }
             # 直接用bestvideo和bestaudio 
@@ -146,7 +146,6 @@ class Youtube(DownloadBase):
             #     ydl_opts['format'] += f"[filesize<{self.youtube_max_videosize}]"
             # if self.youtube_max_resolution is not None:
             #     ydl_opts['format'] += f"[height<={self.youtube_max_resolution}]"
-            ydl_opts['format'] += "bestvideo+bestaudio/best"
             # if self.youtube_prefer_acodec is not None:
             #     ydl_opts['format'] += f"[acodec~='^({self.youtube_prefer_acodec})']"
             # 不能由yt_dlp创建会占用文件夹
